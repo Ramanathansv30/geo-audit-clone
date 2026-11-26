@@ -55,6 +55,7 @@ geo-audit-clone/
 │   ├── requirements.txt   # runtime libraries (installed on Vercel)
 │   ├── requirements-dev.txt # runtime + test libraries (local development)
 │   ├── .python-version    # 3.12, the Python version used on Vercel
+│   ├── nltk_data/         # CMU pronouncing dictionary used by textstat (bundled, never downloaded)
 │   ├── pytest.ini
 │   └── tests/
 │       ├── conftest.py    # shared fixtures and helpers
@@ -424,3 +425,4 @@ Changes from the original implementation plan:
 7. Decided open points: `duration_seconds` definition, robots.txt from the final host, first heading never counts as skipped, H1 for the intro comes from the main content, date candidates fall back in order, empty values count as missing, hard_to_read needs a measurable readability, explicit issue list for the top-5 test, no localhost exception, injectable HTTP client, Vite strictPort.
 8. Benchmarks are computed live from reference sites instead of being fixed sample values (5.6), with the audit pipeline moved to `audit.py` so the API and the benchmark calculation share it.
 9. Prepared for Vercel: benchmarks moved from a background job to a cached `GET /api/benchmarks` endpoint and out of the Report, `vercel.json` added, production builds call the API on the same domain, and test-only libraries moved to `requirements-dev.txt`.
+10. The CMU pronouncing dictionary that textstat needs is bundled in `backend/nltk_data/` and added to NLTK's search path in `checks.py`, because textstat otherwise downloads it into the home directory on first use, which fails on read-only serverless hosts.

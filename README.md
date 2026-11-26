@@ -131,6 +131,8 @@ The repository is set up for [Vercel Services](https://vercel.com/docs/services)
 2. In Vercel, choose **Add New... > Project**, import the repository, and click **Deploy**. Leave Root Directory as the repository root (where `vercel.json` is).
 3. Open the deployment URL and run an audit.
 
+The readability check needs the CMU pronouncing dictionary. It is included in `backend/nltk_data/`, so nothing is downloaded at runtime.
+
 On Vercel the backend runs Python 3.12 (from `backend/.python-version`) and installs `backend/requirements.txt`. The frontend calls the API on the same domain, so no CORS settings or environment variables are needed.
 
 ## Known limitations

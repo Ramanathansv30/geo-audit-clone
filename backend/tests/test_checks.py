@@ -1,4 +1,5 @@
 from datetime import timedelta
+from pathlib import Path
 
 import pytest
 
@@ -295,3 +296,9 @@ def test_missing_alt_text():
 
     assert scores(result)["alt"] == 75
     assert result.issues[0].title == "1 of 4 images have no alt text"
+
+
+def test_readability_dictionary_is_bundled_with_the_project():
+    location = Path(str(checks.nltk.data.find("corpora/cmudict")))
+
+    assert location.is_relative_to(checks.NLTK_DATA_DIR)

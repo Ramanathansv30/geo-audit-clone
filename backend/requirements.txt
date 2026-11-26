@@ -5,3 +5,4 @@ beautifulsoup4==4.15.0
 lxml==6.1.3
 Protego==0.7.0
 textstat==0.7.13
+nltk==3.10.4

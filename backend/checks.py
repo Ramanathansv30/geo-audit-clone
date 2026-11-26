@@ -3,11 +3,19 @@
 from datetime import datetime, timezone
 from functools import partial
 from itertools import pairwise
+from pathlib import Path
 
+import nltk
 import textstat
 from protego import Protego
 
 import config
+
+# textstat counts syllables with the CMU pronouncing dictionary (an NLTK corpus) and tries to
+# download it on first use. The dictionary ships with the project instead, because serverless
+# hosts such as Vercel cannot write to the home directory.
+NLTK_DATA_DIR = Path(__file__).resolve().parent / "nltk_data"
+nltk.data.path.insert(0, str(NLTK_DATA_DIR))
 from crawler import FetchResult
 from extractor import PageFacts, node_types
 from issues import make_issue
